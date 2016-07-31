@@ -1,0 +1,54 @@
+html, body {
+	font-family: 'Helvetica','sans-serif';
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	color: #ffffff;
+	background-color: #1b2d38;
+}
+#map {
+	height: 70%;
+}
+#bottom_form {
+	height: 30%;
+	position: relative;
+	background-color: #1b2d38;
+	text-align: justify;
+	font-family: 'Helvetica','sans-serif';
+	color: #ffffff;
+}
+#top_panel {
+	position: absolute;
+	right: 0%;
+	z-index: 5;
+	background-color: #1b2d38;
+	border: 1px solid #00613b;
+	text-align: center;
+	font: 13px 'Helvetica','sans-serif';
+	line-height: 30px;
+	padding-left: 5px;
+	padding-right: 5px;
+	color: #ffffff;
+	position: absolute;
+	z-index: 5;
+	opacity: 0.85;
+}
+#top_button{
+	background-color: #00613b;
+	border-style: none;
+	color: #ffffff;
+	font-weight: bold;
+	font-size: 13px;
+}
+#bottom_button{
+	background-color: #00613b;
+	border-style: none;
+	color: #ffffff;
+	font-weight: bold;
+	font-size: 13px;
+}
+#legend{
+	font-size: 18px;
+	color: #ffffff;
+	font-weight: bold;
+}
