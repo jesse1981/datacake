@@ -10,8 +10,11 @@
         padding: 0;
       }
       #map {
-        height: 100%;
+        height: 75%;
       }
+	  #form {
+		height: 25%;
+	  }
       #floating-panel {
         position: absolute;
         top: 10px;
@@ -48,39 +51,94 @@
       <button onclick="changeOpacity()">Change opacity</button>
     </div>
     <div id="map"></div>
+	<div id="form">
+		<form>
+			<fieldset>
+				<legend>Crime</legend>
+				<label for="crime">Show</label><input type="checkbox" id="crime" class="enable-field" />
+				<div class="map-filter crime">
+					<label for="timeofday">Time of Day</label>
+					<select id="timeofday">
+						<option value="">Any</option>
+						<option value="Day">Day</option>
+						<option value="Night">Night</option>
+					</select>
+					<label for="dayofweek">Day of Week</label>
+					<select id="dayofweek">
+						<option value="">Any</option>
+						<option value="Weekday">Weekday</option>
+						<option value="Weekend">Weekend</option>
+					</select>
+				</div>
+			</fieldset>
+			<fieldset>
+				<legend>Infrastructure</legend>
+				<label for="infrastructre">Show</label><input type="checkbox" id="infrastructre" class="enable-field"/>
+				<div class="map-filter infrastructre">
+				
+				</div>
+			</fieldset>
+			<fieldset>
+				<legend>Businesses</legend>
+				<label for="businesses">Show</label><input type="checkbox" id="businesses" class="enable-field"/>
+				<div class="map-filter businesses">
+				
+				</div>
+			</fieldset>
+			<fieldset>
+				<legend>Weather</legend>
+				<label for="weather">Show</label><input type="checkbox" id="weather" class="enable-field" />
+				<div class="map-filter weather">
+				
+				</div>
+			</fieldset>
+		</form>
+	</div>
     <script>
 
 	  // This example requires the Visualization library. Include the libraries=visualization
 	  // parameter when you first load the API. For example:
 	  // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=visualization">
 
-	  var map, heatmap;
+	var map;
+	var datasets = {
+		crime: "http://datacake.logisofttech.com.au/crime.csv",
+		infrastructre: "",
+		businesses: ""
+	}
+	var heatmaps = {
+		crime: {},
+		infrastructre: {},
+		businesses: {}
+	}
 	  
-	  function preparePoints() {
-		fetchFile("http://datacake.logisofttech.com.au/crime.csv",function(buffer){
-			csv = csvToArray(buffer);
-			initMap(csv);
-		});
-	  }
-
-	  function initMap(csv) {
+	function initMap(csv) {
 		map = new google.maps.Map(document.getElementById('map'), {
 		  zoom: 13,
 		  center: {lat: -33.89239, lng: 151.21479},
 		  mapTypeId: 'satellite'
 		});
-
-		heatmap = new google.maps.visualization.HeatmapLayer({
-		  data: getPoints(csv),
-		  map: map
+	}
+	
+	function preparePoints(ds,cb) {
+		fetchFile(datasets[ds],function(buffer){
+			csv = csvToArray(buffer);
+			cb(csv);
 		});
-	  }
+	}
+	function createHeatmap(ds) {
+		preparePoints(ds,function(csv){
+			heatmaps[ds] = new google.maps.visualization.HeatmapLayer({
+			  data: getPoints(csv),
+			  map: map
+			});
+		})		
+	}
 
-	  function toggleHeatmap() {
+	function toggleHeatmap() {
 		heatmap.setMap(heatmap.getMap() ? null : map);
 	  }
-
-	  function changeGradient() {
+	function changeGradient() {
 		var gradient = [
 		  'rgba(0, 255, 255, 0)',
 		  'rgba(0, 255, 255, 1)',
@@ -99,14 +157,13 @@
 		]
 		heatmap.set('gradient', heatmap.get('gradient') ? null : gradient);
 	  }
-
-	  function changeRadius() {
+	function changeRadius() {
 		heatmap.set('radius', heatmap.get('radius') ? null : 20);
 	  }
-
-	  function changeOpacity() {
+	function changeOpacity() {
 		heatmap.set('opacity', heatmap.get('opacity') ? null : 0.2);
 	  }
+	
 	function fetchFile(url,fn) {
 		var myRequest = new XMLHttpRequest();
 		myRequest.onreadystatechange = function() {
@@ -133,8 +190,7 @@
 		return result;
 	}
 
-      // Heatmap data: 500 Points
-      function getPoints(csv) {
+    function getPoints(csv) {
 		var points = [];
         var count = 0;
 		for (var i in csv){
@@ -142,10 +198,17 @@
 			count++;
 		}
 		return points;
-      }
+    }
+	
+	$('.enable-field').click(function() {
+		if ($(this).prop("checked")) {
+			var id = $(this).attr('id');
+			createHeatmap(id);
+		}
+	});
     </script>
     <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDy07BesCpsPPYc9E_l4L9v1E7-a7Utf3Q&libraries=visualization&callback=preparePoints">
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDy07BesCpsPPYc9E_l4L9v1E7-a7Utf3Q&libraries=visualization&callback=initMap">
     </script>
   </body>
 </html>
