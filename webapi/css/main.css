@@ -41,14 +41,14 @@ html, body {
 	font-weight: bold;
 	font-size: 13px;
 }
-#legend{
+.legend{
 	font-size: 18px;
 	color: #ffffff;
 	font-weight: bold;
 	text-align: right;
 	background-color: #1b2d38;
 }
-#fieldset{
+.fieldset{
 /*	background-color: #00613b;*/
 	border: 2px solid #00613b;
 

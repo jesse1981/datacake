@@ -6,12 +6,16 @@ var datasets = {
 	weather: "http://datacake.logisofttech.com.au/weather/getAssets",
 	restaurants: "http://datacake.logisofttech.com.au/restaurants/getAssets"
 };
+var pins = {
+	crime: "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|FE0000",
+	restaurants: "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|00FF00"
+};
 var heatmaps = {
-	crime: {},
+	crime: [],
 	lights: {},
 	buildings: {},
 	weather: {},
-	restaurants: {}
+	restaurants: []
 };
 var kmllayers = {
 	crime: "",
@@ -46,11 +50,30 @@ function getPoints(csv) {
 		var points = [];
         var count = 0;
 		for (var i in csv){
-			if (count) points.push(new google.maps.LatLng(csv[i][8], csv[i][9]));
+			if (count) points.push(new google.maps.LatLng(csv[i][2], csv[i][3]));
 			count++;
 		}
 		return points;
-    }
+}
+function createMarkers(ds) {
+	preparePoints(ds,function(csv){
+		var points = getPoints(csv);
+		for (var i in points) {
+			var marker = new google.maps.Marker({
+				position: points[i],
+				map: map,
+				title: '',
+				icon: pins[ds]
+			});
+			heatmaps[ds].push(marker)
+		}
+	});
+}
+function removeMarkers(ds) {
+	for (var i in heatmaps[ds]) {
+		heatmaps[ds][i].setMap(null);
+	}
+}
 function createHeatmap(ds) {
 	preparePoints(ds,function(csv){
 		heatmaps[ds] = new google.maps.visualization.HeatmapLayer({
@@ -67,6 +90,7 @@ function createKml(ds) {
 	  url: kmllayers[ds],
 	  map: map
 	});
+	$("#map").find("img").css("opacity","0.4")
 
 }
 function removeKml(ds) {
