@@ -1,13 +1,17 @@
 var map;
 var datasets = {
-	crime: "http://datacake.logisofttech.com.au/crime.csv",
-	infrastructre: "",
-	businesses: ""
+	crime: "http://datacake.logisofttech.com.au/crime",
+	lights: "http://datacake.logisofttech.com.au/lights",
+	buildings: "http://datacake.logisofttech.com.au/buildings",
+	weather: "http://datacake.logisofttech.com.au/weather",
+	restaurants: "http://datacake.logisofttech.com.au/restaurants"
 }
 var heatmaps = {
 	crime: {},
-	infrastructre: {},
-	businesses: {}
+	lights: {},
+	buildings: {},
+	weather: {},
+	restaurants: {}
 }
   
 function initMap(csv) {
@@ -42,6 +46,7 @@ function createHeatmap(ds) {
 	})		
 }
 
+// Google Functions
 function toggleHeatmap() {
 	heatmap.setMap(heatmap.getMap() ? null : map);
   }

@@ -79,6 +79,19 @@ function csvToArray($filename,$newline="\r\n",$delim=",") {
     }
     return $result;
 }
+function arrayToCsv($res,$hasHeader=true,$outputHeader=false) {
+	$result = "";
+	$count = 0;
+	foreach ($res as $row) {
+		if ($count) $result .= "\r\n";
+		foreach ($row as $k=>$v) {
+			if ((!$count) && ($hasHeader) && ($outputHeader)) $result .= "$k,";
+			else $result .= "$v,";
+		}
+		$count++;
+	}
+	return $result;
+}
 function getPostValues($arr) {
     $res  = array();
     $dash = new dashboard();
