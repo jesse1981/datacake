@@ -59,8 +59,9 @@ class template {
             include $view;
             // Master Template
             if (($template) && (file_exists($template))) {
-                include $template;
+				include $template;
             }
+			else if ($template) die("<h1>The specified template filename $template does not exist!</h1>");
         }
         else $this->renderInterface($view);
     }

@@ -1,4 +1,4 @@
-"","date","temp","dew_pt","hum","wind_spd","wind_gust","dir","vis","pressure","wind_chill","heat_index","precip","cond","fog","rain","snow","hail","thunder","tornado"
+"id","date","temp","dew_pt","hum","wind_spd","wind_gust","dir","vis","pressure","wind_chill","heat_index","precip","cond","fog","rain","snow","hail","thunder","tornado"
 "1",2016-07-01 00:00:00,12,2,38,27.8,NA,"NNW",25,1014,NA,NA,NA,"Partly Cloudy",0,0,0,0,0,0
 "2",2016-07-01 00:00:00,12,2,51,27.8,NA,"NNW",NA,1013,NA,NA,NA,"Clear",0,0,0,0,0,0
 "3",2016-07-01 00:30:00,12,2,51,31.5,NA,"NNW",NA,1013,NA,NA,NA,"Clear",0,0,0,0,0,0

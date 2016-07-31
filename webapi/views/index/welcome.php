@@ -62,6 +62,8 @@
 			</fieldset>
 		</form>
 	</div>
+	<div>
+	</div>
     <script>	
 	$('.enable-field').click(function() {
 		if ($(this).prop("checked")) {

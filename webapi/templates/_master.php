@@ -1,1 +1,3 @@
-THIS IS MY TEMPLATE
+<?php
+echo $content;
+?>
