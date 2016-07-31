@@ -3,58 +3,24 @@
   <head>
     <meta charset="utf-8">
     <title>Heatmaps</title>
-    <style>
-      html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-      #map {
-        height: 75%;
-      }
-	  #form {
-		height: 25%;
-	  }
-      #floating-panel {
-        position: absolute;
-        top: 10px;
-        left: 25%;
-        z-index: 5;
-        background-color: #fff;
-        padding: 5px;
-        border: 1px solid #999;
-        text-align: center;
-        font-family: 'Roboto','sans-serif';
-        line-height: 30px;
-        padding-left: 10px;
-      }
-      #floating-panel {
-        background-color: #fff;
-        border: 1px solid #999;
-        left: 25%;
-        padding: 5px;
-        position: absolute;
-        top: 10px;
-        z-index: 5;
-      }
-    </style>
+    <LINK href="webapi/css/main.css" rel="stylesheet" type="text/css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-map/3.0-rc1/jquery.ui.map.extensions.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-map/3.0-rc1/jquery.ui.map.extensions.min.js"></script>
   </head>
 
   <body>
-    <div id="floating-panel">
-      <button onclick="toggleHeatmap()">Toggle Heatmap</button>
-      <button onclick="changeGradient()">Change gradient</button>
-      <button onclick="changeRadius()">Change radius</button>
-      <button onclick="changeOpacity()">Change opacity</button>
+    <div id="top_panel">
+      <button id="top_button" onclick="toggleHeatmap()">Toggle Heatmap</button>
+      <button id="top_button" onclick="changeGradient()">Change gradient</button>
+      <button id="top_button" onclick="changeRadius()">Change radius</button>
+      <button id="top_button" onclick="changeOpacity()">Change opacity</button>
     </div>
     <div id="map"></div>
-	<div id="form">
+	<div id="bottom_form">
 		<form>
 			<fieldset>
-				<legend>Crime</legend>
+				<legend id="legend">Crime</legend>
 				<label for="crime">Show</label><input type="checkbox" id="crime" class="enable-field" />
 				<div class="map-filter crime">
 					<label for="timeofday">Time of Day</label>
