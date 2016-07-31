@@ -17,7 +17,7 @@ var heatmaps = {
 function initMap(csv) {
 	map = new google.maps.Map(document.getElementById('map'), {
 	  zoom: 13,
-	  center: {lat: -33.89239, lng: 151.21479},
+	  center: {lat: -33.88841, lng: 151.17600},
 	  mapTypeId: 'satellite'
 	});
 }
