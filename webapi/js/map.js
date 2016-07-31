@@ -45,6 +45,9 @@ function createHeatmap(ds) {
 		});
 	})		
 }
+function removeHeatmap(ds) {
+	heatmaps[ds].setMap(null);
+}
 
 // Google Functions
 function toggleHeatmap() {

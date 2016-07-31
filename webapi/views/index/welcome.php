@@ -13,109 +13,63 @@
 
   <body>
     <div id="top_panel">
-      <button id="top_button" onclick="toggleHeatmap()">Toggle Heatmap</button>
-      <button id="top_button" onclick="changeGradient()">Change gradient</button>
-      <button id="top_button" onclick="changeRadius()">Change radius</button>
-      <button id="top_button" onclick="changeOpacity()">Change opacity</button>
+      <form>
+      	<fieldset class = "fieldset">
+      		<legend class="legend">Crime</legend>
+      		<input type="button" id="crime" value="Show Me!" class="button_on enable-field"/>
+      		<div  class="map-filter crime">
+      			<label for="timeofday">Time of Day</label>
+      			<select id="timeofday">
+      				<option value="">Any</option>
+      				<option value="Day">Day</option>
+      				<option value="Night">Night</option>
+      			</select>
+      			<label for="dayofweek">Day of Week</label>
+      			<select id="dayofweek">
+      				<option value="">Any</option>
+      				<option value="Weekday">Weekday</option>
+      				<option value="Weekend">Weekend</option>
+      			</select>
+      		</div>
+      	</fieldset>
+      	<fieldset class = "fieldset">
+      		<legend class="legend">Infrastructure</legend>
+      		<input type="button" id="infrastructre" value="Show Me!" class="button_on enable-field"/>
+      		<div class="map-filter infrastructre">
+      		
+      		</div>
+      	</fieldset>
+      	<fieldset class = "fieldset">
+      		<legend class="legend">Businesses</legend>
+      		<input type="button" id="businesses" value="Show Me!" class="button_on enable-field"/>      		
+			<div class="map-filter businesses">
+      		
+      		</div>
+      	</fieldset>
+      	<fieldset class = "fieldset">
+      		<legend class="legend">Weather</legend>
+      		<input type="button" id="weather" value="Show Me!" class="button_on enable-field"/> 
+      		<div class="map-filter weather">
+      		
+      		</div>
+      	</fieldset>
+      </form>
     </div>
     <div id="map"></div>
-<<<<<<< HEAD
-  	<div id="bottom_form">
-  		<form>
-  			<fieldset>
-  				<legend id="legend">Crime</legend>
-  				<label for="crime">Show</label><input type="checkbox" id="crime" class="enable-field" />
-  				<div class="map-filter crime">
-  					<label for="timeofday">Time of Day</label>
-  					<select id="timeofday">
-  						<option value="">Any</option>
-  						<option value="Day">Day</option>
-  						<option value="Night">Night</option>
-  					</select>
-  					<label for="dayofweek">Day of Week</label>
-  					<select id="dayofweek">
-  						<option value="">Any</option>
-  						<option value="Weekday">Weekday</option>
-  						<option value="Weekend">Weekend</option>
-  					</select>
-  				</div>
-  			</fieldset>
-  			<fieldset>
-  				<legend>Infrastructure</legend>
-  				<label for="infrastructre">Show</label><input type="checkbox" id="infrastructre" class="enable-field"/>
-  				<div class="map-filter infrastructre">
-  				
-  				</div>
-  			</fieldset>
-  			<fieldset>
-  				<legend>Businesses</legend>
-  				<label for="businesses">Show</label><input type="checkbox" id="businesses" class="enable-field"/>
-  				<div class="map-filter businesses">
-  				
-  				</div>
-  			</fieldset>
-  			<fieldset>
-  				<legend>Weather</legend>
-  				<label for="weather">Show</label><input type="checkbox" id="weather" class="enable-field" />
-  				<div class="map-filter weather">
-  				
-  				</div>
-  			</fieldset>
-  		</form>
-  	</div>
-      <script>	
-=======
-	<div id="form">
-		<form>
-			<fieldset>
-				<legend>Crime</legend>
-				<label for="crime">Show</label><input type="checkbox" id="crime" class="enable-field" />
-				<div class="map-filter crime">
-					<label for="timeofday">Time of Day</label>
-					<select id="timeofday">
-						<option value="">Any</option>
-						<option value="Day">Day</option>
-						<option value="Night">Night</option>
-					</select>
-					<label for="dayofweek">Day of Week</label>
-					<select id="dayofweek">
-						<option value="">Any</option>
-						<option value="Weekday">Weekday</option>
-						<option value="Weekend">Weekend</option>
-					</select>
-				</div>
-			</fieldset>
-			<fieldset>
-				<legend>Infrastructure</legend>
-				<label for="infrastructre">Show</label><input type="checkbox" id="infrastructre" class="enable-field"/>
-				<div class="map-filter infrastructre">
-				
-				</div>
-			</fieldset>
-			<fieldset>
-				<legend>Businesses</legend>
-				<label for="businesses">Show</label><input type="checkbox" id="businesses" class="enable-field"/>
-				<div class="map-filter businesses">
-				
-				</div>
-			</fieldset>
-			<fieldset>
-				<legend>Weather</legend>
-				<label for="weather">Show</label><input type="checkbox" id="weather" class="enable-field" />
-				<div class="map-filter weather">
-				
-				</div>
-			</fieldset>
-		</form>
-	</div>
-	<div>
-	</div>
-    <script>	
->>>>>>> origin/master
+
+    <script>
 	$('.enable-field').click(function() {
-		if ($(this).prop("checked")) {
+		if ($(this).hasClass("button_on")) {
+			// enable
 			var id = $(this).attr('id');
 			createHeatmap(id);
+			
+			$(this).removeClass("button_on").addClass('button_off');
+		}
+		else {
+			// disable
+			removeHeatmap(id);
+			$(this).removeClass("button_off").addClass('button_on');
 		}
 	});
     </script>
