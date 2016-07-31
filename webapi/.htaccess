@@ -5,6 +5,7 @@ RewriteRule ^downloads - [L,NC]
 RewriteRule ^js - [L,NC]
 RewriteRule ^img - [L,NC]
 RewriteRule ^css - [L,NC]
+RewriteRule ^kml - [L,NC]
 RewriteRule OpenLayers - [L,NC]
 RewriteRule ^appointments - [L,NC]
 

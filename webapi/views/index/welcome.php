@@ -33,9 +33,9 @@
       		</div>
       	</fieldset>
       	<fieldset class = "fieldset">
-      		<legend class="legend">Infrastructure</legend>
-      		<input type="button" id="infrastructre" value="Show Me!" class="button_on enable-field"/>
-      		<div class="map-filter infrastructre">
+      		<legend class="legend">Lights</legend>
+      		<input type="button" id="lights" value="Show Me!" class="button_on enable-field"/>
+      		<div class="map-filter lights">
       		
       		</div>
       	</fieldset>
@@ -59,16 +59,23 @@
 
     <script>
 	$('.enable-field').click(function() {
+		var id = $(this).attr('id');
+		var d_sets = ["crime"];
+		var k_layers = ["lights"];
 		if ($(this).hasClass("button_on")) {
 			// enable
-			var id = $(this).attr('id');
-			createHeatmap(id);
+			if (d_sets.indexOf(id)>=0) createHeatmap(id);
+			else if (k_layers.indexOf(id)>=0) createKml(id);
 			
+			$(this).val("Hide");
 			$(this).removeClass("button_on").addClass('button_off');
 		}
 		else {
 			// disable
-			removeHeatmap(id);
+			if (d_sets.indexOf(id)>=0) removeHeatmap(id);
+			else if (k_layers.indexOf(id)>=0) removeKml(ds);
+			
+			$(this).val("Show Me!");
 			$(this).removeClass("button_off").addClass('button_on');
 		}
 	});

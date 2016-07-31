@@ -1,18 +1,32 @@
 var map;
 var datasets = {
-	crime: "http://datacake.logisofttech.com.au/crime",
-	lights: "http://datacake.logisofttech.com.au/lights",
-	buildings: "http://datacake.logisofttech.com.au/buildings",
-	weather: "http://datacake.logisofttech.com.au/weather",
-	restaurants: "http://datacake.logisofttech.com.au/restaurants"
-}
+	crime: "http://datacake.logisofttech.com.au/crime/getAssets",
+	lights: "http://datacake.logisofttech.com.au/lights/getAssets",
+	buildings: "http://datacake.logisofttech.com.au/buildings/getAssets",
+	weather: "http://datacake.logisofttech.com.au/weather/getAssets",
+	restaurants: "http://datacake.logisofttech.com.au/restaurants/getAssets"
+};
 var heatmaps = {
 	crime: {},
 	lights: {},
 	buildings: {},
 	weather: {},
 	restaurants: {}
-}
+};
+var kmllayers = {
+	crime: "",
+	lights: "http://googlemaps.github.io/js-v2-samples/ggeoxml/cta.kml", //"http://datacake.logisofttech.com.au/kml/lights.kml",
+	buildings: "",
+	weather: "",
+	restaurants: ""
+};
+var kmllayers_used = {
+	crime: {},
+	lights: {},
+	buildings: {},
+	weather: {},
+	restaurants: {}
+};
   
 function initMap(csv) {
 	map = new google.maps.Map(document.getElementById('map'), {
@@ -47,6 +61,16 @@ function createHeatmap(ds) {
 }
 function removeHeatmap(ds) {
 	heatmaps[ds].setMap(null);
+}
+function createKml(ds) {
+	kmllayers_used[ds] = new google.maps.KmlLayer({
+	  url: kmllayers[ds],
+	  map: map
+	});
+
+}
+function removeKml(ds) {
+	kmllayers_used.setMap(null);
 }
 
 // Google Functions
